@@ -1,0 +1,23 @@
+{
+  "name": "@daozhao/directory_routers",
+  "version": "1.0.0",
+  "description": "递归注册文件夹内路由",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shadowprompt/directory_routers.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shadowprompt/directory_routers/issues"
+  },
+  "homepage": "https://github.com/shadowprompt/directory_routers#readme",
+  "dependencies": {
+    "express": "^4.17.3"
+  }
+}
