@@ -1,22 +1,22 @@
 {
-  "name": "@daozhao/directory_routers",
+  "name": "@daozhao/recursive_dirs_files",
   "version": "1.0.0",
-  "description": "递归注册文件夹内路由",
+  "description": "递归处理文件夹及文件",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node example.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/shadowprompt/directory_routers.git"
+    "url": "git+https://github.com/shadowprompt/recursive_dirs_files.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/shadowprompt/directory_routers/issues"
+    "url": "https://github.com/shadowprompt/recursive_dirs_files/issues"
   },
-  "homepage": "https://github.com/shadowprompt/directory_routers#readme",
+  "homepage": "https://github.com/shadowprompt/recursive_dirs_files#readme",
   "dependencies": {
     "express": "^4.17.3"
   }

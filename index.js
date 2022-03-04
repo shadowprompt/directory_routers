@@ -4,38 +4,34 @@ const fs = require('fs');
 const readDir = promisify(fs.readdir);
 const readStat = promisify(fs.stat);
 
-async function registerRouter(app, config = {}) {
+async function main(app, config = {}) {
+  const fileReg = config.fileReg || /\.[j|t]s$/;
 
-  async function scan(parentPath, isTop) {
-    const parentStat = await readStat(parentPath);
+  async function scanDir(entryPath, parents = []) {
+    const parentStat = await readStat(entryPath);
 
     if (parentStat.isDirectory()) {
-      const nameArr = parentPath.replace(/\/$/, '').split(path.sep);
-      const parentName = nameArr.pop();
-
-      const routerFiles = await readDir(parentPath);
+      const routerFiles = await readDir(entryPath);
       for (const fileName of routerFiles) {
-        const filePath = path.resolve(parentPath, fileName);
+        const filePath = path.resolve(entryPath, fileName);
         const fileStat = await readStat(filePath);
         if (fileStat.isDirectory()) {
-          await scan(filePath);
-        } else if (/\.[j|t]s$/.test(fileName)) {
-          const router = require(path.resolve(filePath));
-          app.use('/' + (isTop ? '' : parentName), router);
+          const nameArr = filePath.replace(/\/$/, '').split(path.sep);
+          const entryName = nameArr.pop();
+          const dirPaths = [...parents, entryName];
+          await scanDir(filePath, dirPaths);
+        } else if (fileReg.test(fileName)) {
+          const fn = require(path.resolve(filePath));
+          typeof config.handleFile === 'function' && config.handleFile(fileName, fn, parents);
         }
       }
-      !isTop && register(parentName, parentPath);
+      typeof config.handleDirectory === 'function' && config.handleDirectory(parents, entryPath);
     }
   }
 
-  function register(fileName, filePath) {
-    const url = typeof config.dirDefaultRouter === 'function' && config.dirDefaultRouter(fileName, filePath);
-    if (url && config.middleware) {
-      app.use(url, config.middleware(fileName, filePath));
-    }
-  }
-
-  scan(config.baseDir, true);
+  scanDir(config.baseDir, []).catch(err => {
+    console.warn('err -> ', err);
+  });
 }
 
-module.exports = registerRouter;
+module.exports = main;

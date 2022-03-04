@@ -1,18 +1,21 @@
 const path = require('path');
 const express = require('express');
-const directoryRouters = require('./index');
+const recursiveDirsFiles = require('./index');
 
 const app = express();
 
-directoryRouters(app, {
+recursiveDirsFiles(app, {
   baseDir: path.resolve(__dirname, './routers'),
-  dirDefaultRouter(fileName, filePath) {
-    return '/' + fileName + '/*';
+  fileReg: /\.js$/,
+  handleFile(fileName, fn, dirs) {
+    const url = '/' + dirs.join('/');
+    app.use(url, fn);
   },
-  middleware(fileName, filePath) {
-    return (req, res) => {
-      res.send(`hit /${fileName}/* default router`);
-    }
+  handleDirectory(dirs, fullPath) {
+    const url = '/' + dirs.join('/');
+    app.use(url, (req, res) => {
+      res.send(`hit ${url}/* default router`);
+    });
   }
 });
 
