@@ -1,6 +1,6 @@
 {
   "name": "@daozhao/recursive_dirs_files",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "递归处理文件夹及文件",
   "main": "index.js",
   "scripts": {
@@ -16,8 +16,5 @@
   "bugs": {
     "url": "https://github.com/shadowprompt/recursive_dirs_files/issues"
   },
-  "homepage": "https://github.com/shadowprompt/recursive_dirs_files#readme",
-  "dependencies": {
-    "express": "^4.17.3"
-  }
+  "homepage": "https://github.com/shadowprompt/recursive_dirs_files#readme"
 }

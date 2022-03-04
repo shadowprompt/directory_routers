@@ -1,6 +1,6 @@
 const path = require('path');
 const express = require('express');
-const recursiveDirsFiles = require('./index');
+const recursiveDirsFiles = require('recursive_dirs_files');
 
 const app = express();
 
