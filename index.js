@@ -4,7 +4,7 @@ const fs = require('fs');
 const readDir = promisify(fs.readdir);
 const readStat = promisify(fs.stat);
 
-async function main(app, config = {}) {
+async function main(config = {}) {
   const fileReg = config.fileReg || /\.[j|t]s$/;
 
   async function scanDir(entryPath, parents = []) {
@@ -29,9 +29,7 @@ async function main(app, config = {}) {
     }
   }
 
-  scanDir(config.baseDir, []).catch(err => {
-    console.warn('err -> ', err);
-  });
+  return scanDir(config.baseDir, []);
 }
 
 module.exports = main;

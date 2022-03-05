@@ -1,7 +1,7 @@
 {
   "name": "@daozhao/recursive_dirs_files",
-  "version": "1.0.1",
-  "description": "递归处理文件夹及文件",
+  "version": "1.0.4",
+  "description": "recursive read files in the entry directory and its subfolders",
   "main": "index.js",
   "scripts": {
     "test": "node example.js"

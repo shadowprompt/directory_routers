@@ -7,7 +7,7 @@ recursive read files in the entry directory and its subfolders, then handle...
 ```javascript
 const path = require('path');
 const express = require('express');
-const recursiveDirsFiles = require('./index');
+const recursiveDirsFiles = require('recursive_dirs_files');
 
 const app = express();
 
@@ -24,10 +24,10 @@ recursiveDirsFiles(app, {
       res.send(`hit ${url}/* default router`);
     });
   }
-});
-
-app.listen(9000, () => {
-  console.log('listening -> ', 9000);
+}).then(() => {
+  app.listen(9000, () => {
+    console.log('listening -> ', 9000);
+  });
 });
 ```
 

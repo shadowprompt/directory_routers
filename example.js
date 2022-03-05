@@ -1,10 +1,10 @@
 const path = require('path');
 const express = require('express');
-const recursiveDirsFiles = require('recursive_dirs_files');
+const recursiveDirsFiles = require('./index');
 
 const app = express();
 
-recursiveDirsFiles(app, {
+recursiveDirsFiles({
   baseDir: path.resolve(__dirname, './routers'),
   fileReg: /\.js$/,
   handleFile(fileName, fn, dirs) {
